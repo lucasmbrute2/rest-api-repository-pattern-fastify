@@ -1,19 +1,24 @@
 {
-  "name": "rest-api-solid-ignite",
-  "version": "1.0.0",
-  "description": "Gympass style app",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "@types/node": "^18.15.1",
-    "tsup": "^6.6.3",
-    "tsx": "^3.12.5",
-    "typescript": "^4.9.5",
-    "vitest": "^0.29.2"
-  }
+    "name": "rest-api-solid-ignite",
+    "version": "1.0.0",
+    "description": "Gympass style app",
+    "main": "index.js",
+    "scripts": {
+        "start:dev": "tsx watch src/server.ts",
+        "build": "tsup src --out-dir build",
+        "start": "node build/server.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "@types/node": "^18.15.1",
+        "tsup": "^6.6.3",
+        "tsx": "^3.12.5",
+        "typescript": "^4.9.5",
+        "vitest": "^0.29.2"
+    },
+    "dependencies": {
+        "fastify": "^4.14.1"
+    }
 }
