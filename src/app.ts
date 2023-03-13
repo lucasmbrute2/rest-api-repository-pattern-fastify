@@ -1,8 +1,8 @@
-import fastify from "fastify";
-export const app = fastify();
+import fastify from 'fastify'
+export const app = fastify()
 
-app.get("/", (req, reply) => {
-    reply.send({
-        message: "Hello world",
-    });
-});
+app.get('/', (req, reply) => {
+  reply.send({
+    message: 'Hello world',
+  })
+})
