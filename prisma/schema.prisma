@@ -8,11 +8,12 @@ datasource db {
 }
 
 model User {
-  id            String   @id @default(uuid())
+  id            String    @id @default(uuid())
   name          String
-  email         String   @unique
+  email         String    @unique
   password_hash String
-  created_at    DateTime @default(now())
+  created_at    DateTime  @default(now())
+  checkIns      CheckIn[]
 
   @@map("users")
 }
@@ -21,6 +22,12 @@ model CheckIn {
   id           String    @id @default(uuid())
   created_at   DateTime  @default(now())
   validated_at DateTime?
+
+  user User @relation(fields: [user_id], references: [id])
+  gym  Gym  @relation(fields: [gymId], references: [id])
+
+  user_id String
+  gymId   String
 
   @@map("check_ins")
 }
@@ -33,5 +40,13 @@ model Gym {
   latitude    Decimal
   longitude   Decimal
 
+  checkIns CheckIn[]
+
   @@map("gyms")
 }
+
+//relacionamentos
+
+// 1-1 => provalmente esses dados poderiam estar na mesma tabela, porém são separados para ficarem mais semânticos
+// 1-N
+// N-N
