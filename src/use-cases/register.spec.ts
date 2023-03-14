@@ -24,7 +24,6 @@ describe('Register use case', () => {
       'Adkasd#131',
       user.password_hash,
     )
-    console.log(user)
     expect(isPasswordCorrectlyHashed).toBe(true)
   })
 
@@ -46,25 +45,7 @@ describe('Register use case', () => {
     }).rejects.toBeInstanceOf(UserAlreadyExistsError)
   })
 
-  it('should not be able to register with same email twice', async () => {
-    const email = 'johndoe@example.com'
-
-    await registerUseCase.execute({
-      email,
-      name: 'Lucas',
-      password: 'Adkasd#131',
-    })
-
-    expect(async () => {
-      await registerUseCase.execute({
-        email,
-        name: 'Lucas',
-        password: 'Adkasd#131',
-      })
-    }).rejects.toBeInstanceOf(UserAlreadyExistsError)
-  })
-
-  it('should not be able to register with same email twice', async () => {
+  it('should be able to register an user', async () => {
     const email = 'johndoe@example.com'
 
     const { user } = await registerUseCase.execute({
