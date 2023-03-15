@@ -1,9 +1,29 @@
 import { CheckIn, Prisma } from '@prisma/client'
+import dayjs from 'dayjs'
 import { randomUUID } from 'node:crypto'
 import { CheckInsRepository } from '../check-ins-repository'
 
 export class InMemoryCheckInsRepository implements CheckInsRepository {
   public items: CheckIn[] = []
+
+  async findByUserIdOnDate(
+    userId: string,
+    date: Date,
+  ): Promise<CheckIn | null> {
+    const startOfTheDay = dayjs(date).startOf('date') // pega o dia com a hora inicial
+    const endOfTheDay = dayjs(date).endOf('date') // pega o dia com a hora final
+
+    const checkinOnSameDate = this.items.find((ck) => {
+      const checkInDate = dayjs(ck.created_at)
+      const isOnSameDate =
+        checkInDate.isAfter(startOfTheDay) && checkInDate.isBefore(endOfTheDay) // valida se está no intervalo de horas
+
+      return ck.user_id === userId && isOnSameDate
+    })
+
+    if (!checkinOnSameDate) return null
+    return checkinOnSameDate
+  }
 
   async create(data: Prisma.CheckInUncheckedCreateInput): Promise<CheckIn> {
     const checkIn = {
@@ -17,15 +37,5 @@ export class InMemoryCheckInsRepository implements CheckInsRepository {
     this.items.push(checkIn)
 
     return checkIn
-  }
-
-  async findByUserIdOnDate(
-    userId: string,
-    date: Date,
-  ): Promise<CheckIn | null> {
-    const checkinOnSameDate = this.items.find((ck) => ck.user_id === userId)
-
-    if (!checkinOnSameDate) return null
-    return checkinOnSameDate
   }
 }
