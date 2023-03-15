@@ -1,6 +1,6 @@
 import { UsersRepository } from '@/repositories/users-repository'
 import { User } from '@prisma/client'
-import { InvalidCredentialsError } from './errors/invalid-credentials-error'
+import { ResourceNotFound } from './errors/resource-not-found-error'
 
 interface GetUserProfileUseCaseRequest {
   userId: string
@@ -18,7 +18,7 @@ export class GetUserProfileUseCase {
   }: GetUserProfileUseCaseRequest): Promise<GetUserProfileUseCaseResponse> {
     const user = await this.usersRepository.findById(userId)
 
-    if (!user) throw new InvalidCredentialsError()
+    if (!user) throw new ResourceNotFound()
 
     return {
       user,
