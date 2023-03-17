@@ -9,7 +9,9 @@
         "start": "node build/server.js",
         "test": "vitest run --dir src/use-cases",
         "test:watch": "vitest --dir src/use-cases",
-        "pretest:e2e": "",
+        "test-create-prisma-environment": "yarn link ./prisma/vitest-environment-prisma",
+        "test:install-prisma-environment": "yarn link vitest-environment-prisma",
+        "pretest:e2e": "run-s test-create-prisma-environment test:install-prisma-environment",
         "test:e2e": "vitest run --dir src/http",
         "test:coverage": "vitest run --coverage"
     },
