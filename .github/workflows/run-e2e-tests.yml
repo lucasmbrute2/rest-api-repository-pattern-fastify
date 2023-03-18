@@ -13,9 +13,9 @@ jobs:
       ports:
         - 5432:5432
       env:
-        - POSTGRESQL_USERNAME=${POSTGRESQL_USERNAME}
-        - POSTGRESQL_PASSWORD=${POSTGRESQL_PASSWORD}
-        - POSTGRESQL_DATABASE=${POSTGRESQL_DATABASE}
+        POSTGRESQL_USERNAME: lucasusername
+        POSTGRESQL_PASSWORD: lucaspassword
+        POSTGRESQL_DATABASE: api-solid
 
     steps:
       - uses: actions/checkout@v3
