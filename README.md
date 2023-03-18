@@ -22,11 +22,11 @@ Gympass style app
 -   [x] O usuário não pode fazer check-in se não estiver perto (100m) da academia
 -   [x] O check-in só pode ser validado até 20 minutos após criado
 -   [] O check-in só pode ser validado por admnistradores
--   [] A academia só pode ser cadastrada por admnistradores
+-   [x] A academia só pode ser cadastrada por admnistradores
 
 ## RNFs (Requisitos não-funcionáis) // técnico
 
 -   [x] Senha do usuário precisa estar criptografada
 -   [x] Os dados da aplicação precisam estar persistidos em um banco PostegreSQL
 -   [x] Todas listas de dados precisam estar paginadas com 20 itens por página
--   [] O usuário deve ser identificado por um JWT
+-   [x] O usuário deve ser identificado por um JWT
